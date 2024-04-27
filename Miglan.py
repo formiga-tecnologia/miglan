@@ -57,8 +57,20 @@ class Miglan():
             
 
 
-
+import numpy as np
             
 
-Ml = Miglan()
-print(Ml.ExecuteModel("soma"))
+#Ml = Miglan()
+#print(Ml.ExecuteModel("soma"))
+
+DataBase = [[12,23,45,56],[34,56,67,78]]
+Data = np.random.randn(3,3)
+data2 = Data[Data >=0]
+print(data2[2])
+
+
+#Matriz= [[12,34,56,78,90,45],[23,34,54,56,56,67]]
+
+# 12,34,56,78,90,45,s
+# 23,34,54,56,56,67,s
+# S, s ,s ,s , s ,s
