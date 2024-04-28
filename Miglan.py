@@ -105,12 +105,11 @@ class Miglan():
             
 
 import numpy as np
-            
-DataBase = [[12,23,45,56],[34,56,67,78]]
 Data_list = [[2,3,4],[3,4,5]]
-Data = np.arange(12).reshape(4,3)
 Ml = Miglan()
 Data_list.append(Ml.ExecuteModel("soma",Data_list))
+
+Data_list.append(Ml.ExecuteModel("acumulativo",Data_list))
 print(Data_list)
 #-2.54937024
 

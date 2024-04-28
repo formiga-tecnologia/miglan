@@ -1,5 +1,6 @@
 model:soma
 @soma #0
 @soma #1
-@soma 4 5
-@soma 4 5 10 20
+
+model:acumulativo
+@soma #2
