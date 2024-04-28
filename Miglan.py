@@ -1,4 +1,5 @@
 import os
+import numpy as np
 
 class Miglan():
     """
@@ -102,19 +103,3 @@ class Miglan():
                 Value = self.ExecuteAction(Action_base)
                 Results.append(Value)
         return Results
-            
-
-import numpy as np
-Data_list = [[2,3,4],[3,4,5]]
-Ml = Miglan()
-Data_list.append(Ml.ExecuteModel("soma",Data_list))
-
-Data_list.append(Ml.ExecuteModel("acumulativo",Data_list))
-print(Data_list)
-#-2.54937024
-
-#Matriz= [[12,34,56,78,90,45],[23,34,54,56,56,67]]
-
-# 12,34,56,78,90,45,s
-# 23,34,54,56,56,67,s
-# S, s ,s ,s , s ,s
