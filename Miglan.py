@@ -16,17 +16,47 @@ class Miglan():
        
        def soma(value):
            #sum values
-           value.pop(0)
            Value_=0
+           if isinstance(value,tuple) or isinstance(value,np.ndarray):
+               #Numpy Case
+
+               if(isinstance(value,np.ndarray)):
+                   try:
+                        for value_sum in value:
+                            for i in value_sum:
+                                Value_+=i
+                        return Value_
+                   except:
+                       for sum_value in value:
+                           Value_+=sum_value
+                       return Value_
+               for value_sum in value:
+                   Value_+=int(value_sum)
+               return Value_
+                #End Numpy Case
+
+           #List Case
+           if(isinstance(value,type([]))):
+               for value_sum in value:
+                    Value_+=int(value_sum)
+               return Value_
+           
+           #End List Case
+           
+           value.pop(0)
            for value_sum in value:
                Value_+=int(value_sum)
            return Value_
        ActionsValids = {"soma":soma}  
        action_function = ActionsValids.get(ActionName[0])
-       if action_function:   
+       if action_function:
+            if isinstance(Values,tuple)  or isinstance(Values,np.ndarray) :
+                return action_function(Values)
+            if isinstance(Values, type([])):
+                return action_function(Values)
             return action_function(ActionName[1])
 
-    def ExecuteModel(self,ModelName):
+    def ExecuteModel(self,ModelName,ValueBase=None):
         """
         Execute your model, when return create new values to your
         database.
@@ -51,23 +81,23 @@ class Miglan():
             Param = action.strip()
             Param = Param.split(" ")
             Action_base = (Param[0],Param)
-            Value = self.ExecuteAction(Action_base)
-            Results.append(Value)
+            if(ValueBase is not None and len(ValueBase) >0):
+                Value = self.ExecuteAction(Action_base,ValueBase)
+                Results.append(Value)
+            else:
+                Value = self.ExecuteAction(Action_base)
+                Results.append(Value)
         return Results
             
 
-
 import numpy as np
             
-
-#Ml = Miglan()
-#print(Ml.ExecuteModel("soma"))
-
 DataBase = [[12,23,45,56],[34,56,67,78]]
-Data = np.random.randn(3,3)
-data2 = Data[Data >=0]
-print(data2[2])
+Data = np.arange(12).reshape(4,3)
+Ml = Miglan()
+print(Ml.ExecuteModel("soma",[2,3,4]))
 
+#-2.54937024
 
 #Matriz= [[12,34,56,78,90,45],[23,34,54,56,56,67]]
 
