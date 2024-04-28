@@ -41,11 +41,7 @@ class Miglan():
                return Value_
            
            #End List Case
-           
-           value.pop(0)
-           for value_sum in value:
-               Value_+=int(value_sum)
-           return Value_
+
        ActionsValids = {"soma":soma}  
        action_function = ActionsValids.get(ActionName[0])
        FilterCols = None
@@ -53,7 +49,12 @@ class Miglan():
             if("#" in ActionName[1][1]):
                 FilterCols = str(ActionName[1][1]).replace("#","")
                 FilterCols = FilterCols.split(",")
-       print(FilterCols)
+
+       if(FilterCols == None and len(ActionName) >=2):
+           ValueList = list(ActionName[1])
+           ValueList.pop(0)
+           return action_function(ValueList)
+           
        if action_function:
             if isinstance(Values,tuple)  or isinstance(Values,np.ndarray) :  
                 if(len(FilterCols)==1):
@@ -63,7 +64,7 @@ class Miglan():
                 return action_function(Values)
             if isinstance(Values, type([])):
                 if(len(FilterCols)==1):
-                    return action_function(Values[FilterCols[0]])
+                    return action_function(Values[int(FilterCols[0])])
                 if(len(FilterCols) > 1):
                     return action_function(Values[int(FilterCols[0])][int(FilterCols[1])])
                 return action_function(Values)
@@ -83,7 +84,7 @@ class Miglan():
         Model_find = False
         for  i in comands:
             if(i[0] !="@" and Model_find == True):
-                return 0
+                break
             if("model:"+ModelName in i ):
                 modelName = i.replace("model:","").replace("/n","").strip()
                 if(modelName == ModelName):
@@ -106,10 +107,11 @@ class Miglan():
 import numpy as np
             
 DataBase = [[12,23,45,56],[34,56,67,78]]
+Data_list = [[2,3,4],[3,4,5]]
 Data = np.arange(12).reshape(4,3)
 Ml = Miglan()
-print(Ml.ExecuteModel("soma",[[2,3,4],[3,4,5]]))
-
+Data_list.append(Ml.ExecuteModel("soma",Data_list))
+print(Data_list)
 #-2.54937024
 
 #Matriz= [[12,34,56,78,90,45],[23,34,54,56,56,67]]
