@@ -13,7 +13,6 @@ class Miglan():
         self.baseFile = os.path.join(self.PathFile+self.Path,"base.migl")
         
     def ExecuteAction(self,ActionName,Values=None):
-       
        def soma(value):
            #sum values
            Value_=0
@@ -49,10 +48,24 @@ class Miglan():
            return Value_
        ActionsValids = {"soma":soma}  
        action_function = ActionsValids.get(ActionName[0])
+       FilterCols = None
+       if(len(ActionName[1])>=1):   
+            if("#" in ActionName[1][1]):
+                FilterCols = str(ActionName[1][1]).replace("#","")
+                FilterCols = FilterCols.split(",")
+       print(FilterCols)
        if action_function:
-            if isinstance(Values,tuple)  or isinstance(Values,np.ndarray) :
+            if isinstance(Values,tuple)  or isinstance(Values,np.ndarray) :  
+                if(len(FilterCols)==1):
+                    return action_function(Values[FilterCols[0]])
+                if(len(FilterCols) > 1):
+                    return action_function(Values[FilterCols[0]][FilterCols[1]])
                 return action_function(Values)
             if isinstance(Values, type([])):
+                if(len(FilterCols)==1):
+                    return action_function(Values[FilterCols[0]])
+                if(len(FilterCols) > 1):
+                    return action_function(Values[int(FilterCols[0])][int(FilterCols[1])])
                 return action_function(Values)
             return action_function(ActionName[1])
 
@@ -95,7 +108,7 @@ import numpy as np
 DataBase = [[12,23,45,56],[34,56,67,78]]
 Data = np.arange(12).reshape(4,3)
 Ml = Miglan()
-print(Ml.ExecuteModel("soma",[2,3,4]))
+print(Ml.ExecuteModel("soma",[[2,3,4],[3,4,5]]))
 
 #-2.54937024
 

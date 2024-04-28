@@ -1,4 +1,4 @@
 model:soma
-@soma 5 5
-@media a 
-@desvioPadrao
+@soma #1,2 
+@media 0 
+@desvioPadrao 0
