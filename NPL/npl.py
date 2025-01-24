@@ -23,7 +23,7 @@ class npl:
                       if i not in "Grammar_key_data"  and DataModel_[i][0] == 0 :
                             print("  **  ")
                             print(i)
-                            List_data = [int(input("mood ")),int(input("Importance ")),int(input("Family ")),int(input("Group ")),int(input("Gender "))]
+                            List_data = [float(input("mood ")),float(input("Importance ")),float(input("Family ")),float(input("Group ")),float(input("Gender "))]
                             DataModel_[i] = List_data
                 with open(self.model,'w')  as DataFile:
                     json.dump(DataModel_, DataFile, ensure_ascii=False, indent=4, separators=(",", ": "))
@@ -58,5 +58,5 @@ class npl:
 
 n = npl()
 #n.ProcessInput("Eu gosto de macarrao com queijo,mas odeio alface")
-
-print(n.ProcessKeyWord("voce gosta de queijo ou alface ?"))
+n.TokenModel()
+#print(n.ProcessKeyWord("voce gosta de queijo ou alface ?"))
