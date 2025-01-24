@@ -10,8 +10,10 @@ class npl:
             Text_process = text.split(" ")
             Data["Grammar_key_data"] = self.GrammarProcess()
             self.GrammarProcess()
+            id_token = 0
             for i in Text_process:                    
-                    Data[str(i).lower()] = [0,0,0,0,0]
+                    Data[str(i).lower()] = [0,0,0,0,0,id_token]
+                    id_token+=1
             with open(self.model,'w')  as DataFile:
                 json.dump(Data, DataFile, ensure_ascii=False, indent=4, separators=(",", ": "))
 
@@ -54,9 +56,48 @@ class npl:
                             Key_ = i
         return (KeyWord_value,Key_)
 
+    def SplitWords(self,Text,Delimiter,List=[]):
+         if List!= []:
+              for i in Text.split(Delimiter):
+                 List.append(i)
+              return List
+         return Text.split(Delimiter)
+         
+    def GroupByGroup(self,ListWords:list):
+         Groups = {}
+         with open(self.model,"r") as Model:
+              JsonModel =json.load(Model)
+              for i in ListWords:
+                   a=JsonModel.get(i)
+                   if not a is None:
+                        if not Groups.get(round(a[2]))  is None:
+                             Groups[round(a[2])].append(a)
+                        else:
+                             Groups[round(a[2])] = [a] 
+         return Groups
+    
+    def ImportanceKeyForGroup(self,GroupKeys):
+         List_Group_important= []
+         MaxGroup = 0
+         VectorMax = None
 
+         for i in GroupKeys:
+              for a in GroupKeys[i]:
+                    if a[1] > MaxGroup:
+                         VectorMax = a
+                         MaxGroup = a[1]
+              List_Group_important.append((i,VectorMax))
+              MaxGroup = 0
+              VectorMax = None
+         return List_Group_important
+         
 
 n = npl()
+Texto_ = "Eu gosto de macarrao com queijo,mas odeio alface"
 #n.ProcessInput("Eu gosto de macarrao com queijo,mas odeio alface")
-n.TokenModel()
-#print(n.ProcessKeyWord("voce gosta de queijo ou alface ?"))
+#n.TokenModel()
+print(Texto_.replace(","," "))
+a= n.GroupByGroup(n.SplitWords(Texto_.replace(","," ")," "))
+print(a)
+print(n.ImportanceKeyForGroup(a))
+
