@@ -11,7 +11,7 @@ class npl:
             Data["Grammar_key_data"] = self.GrammarProcess()
             self.GrammarProcess()
             for i in Text_process:                    
-                    Data[str(i).lower()] = [0,0,0,0]
+                    Data[str(i).lower()] = [0,0,0,0,0]
             with open(self.model,'w')  as DataFile:
                 json.dump(Data, DataFile, ensure_ascii=False, indent=4, separators=(",", ": "))
 
@@ -23,7 +23,7 @@ class npl:
                       if i not in "Grammar_key_data"  and DataModel_[i][0] == 0 :
                             print("  **  ")
                             print(i)
-                            List_data = [int(input("mood ")),int(input("Importance ")),int(input("Family ")),int(input("Group "))]
+                            List_data = [int(input("mood ")),int(input("Importance ")),int(input("Family ")),int(input("Group ")),int(input("Gender "))]
                             DataModel_[i] = List_data
                 with open(self.model,'w')  as DataFile:
                     json.dump(DataModel_, DataFile, ensure_ascii=False, indent=4, separators=(",", ": "))
