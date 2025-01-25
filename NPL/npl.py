@@ -90,14 +90,32 @@ class npl:
               MaxGroup = 0
               VectorMax = None
          return List_Group_important
+    
+    def ReturnWord(self,Keys):
+          List_words = []
+          iterator = 0
+          with open(self.model,"r") as Model:
+              JsonModel =json.load(Model)
+              for i in Keys:
+                   iterator = 0
+                   for s in JsonModel:
+                     iterator+=1
+                     if iterator >i:
+                        List_words.append(s)
+                        break  
+          return List_words
+                   
          
 
 n = npl()
 Texto_ = "Eu gosto de macarrao com queijo,mas odeio alface"
 #n.ProcessInput("Eu gosto de macarrao com queijo,mas odeio alface")
 #n.TokenModel()
-print(Texto_.replace(","," "))
-a= n.GroupByGroup(n.SplitWords(Texto_.replace(","," ")," "))
-print(a)
-print(n.ImportanceKeyForGroup(a))
+#a= n.GroupByGroup(n.SplitWords(Texto_.replace(","," ")," "))
+list_a = n.SplitWords(Texto_,",")
+a= n.GroupByGroup(n.SplitWords(list_a[0]," "))
+ax=n.ImportanceKeyForGroup(a)
+Words = n.ReturnWord([ax[0][1][4],ax[1][1][5]]) 
+
+print("Eu "+Words[0]+" de " +Words[1])
 
