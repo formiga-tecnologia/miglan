@@ -121,7 +121,8 @@ class npl:
                         break  
           return List_words
                    
-         
+    def DispersionGroup(self,GroupKeys):#max - min / 10
+             ...
 
 n = npl()
 Texto_ = "Eu gosto de macarrao com queijo,mas odeio alface"
@@ -131,6 +132,7 @@ Texto_ = "Eu gosto de macarrao com queijo,mas odeio alface"
 list_a = n.SplitWords(Texto_,",")
 a= n.GroupByGroup(n.SplitWords(list_a[0]," "))
 ax=n.ImportanceKeyForGroup(a)
+n.DispersionGroup(ax)
 print(ax)
 Words = n.ReturnWord([ax[0][1][4],ax[1][1][5]]) 
 
