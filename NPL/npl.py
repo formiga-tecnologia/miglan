@@ -64,6 +64,7 @@ class npl:
          return Text.split(Delimiter)
          
     def GroupByGroup(self,ListWords:list):
+
          Groups = {}
          with open(self.model,"r") as Model:
               JsonModel =json.load(Model)
@@ -77,18 +78,33 @@ class npl:
          return Groups
     
     def ImportanceKeyForGroup(self,GroupKeys):
+         """
+          Generate list with Max and Min width in each group 
+        Args:
+            GroupKeys (list): Use the list generate for GroupByGroup function 
+
+        Returns:
+            list: [(Grpup(round value),Max vector Key, Min Vector Key)]
+         """
          List_Group_important= []
          MaxGroup = 0
          VectorMax = None
+         MinGroup = 0
+         VectorMin= None
 
          for i in GroupKeys:
               for a in GroupKeys[i]:
                     if a[1] > MaxGroup:
                          VectorMax = a
                          MaxGroup = a[1]
-              List_Group_important.append((i,VectorMax))
+                    if a[1] < MinGroup or MinGroup == 0:
+                         VectorMin = a
+                         MinGroup = a[1]
+              List_Group_important.append((i,VectorMax,VectorMin))
               MaxGroup = 0
               VectorMax = None
+              MinGroup = 0
+              VectorMin= None
          return List_Group_important
     
     def ReturnWord(self,Keys):
@@ -115,7 +131,7 @@ Texto_ = "Eu gosto de macarrao com queijo,mas odeio alface"
 list_a = n.SplitWords(Texto_,",")
 a= n.GroupByGroup(n.SplitWords(list_a[0]," "))
 ax=n.ImportanceKeyForGroup(a)
+print(ax)
 Words = n.ReturnWord([ax[0][1][4],ax[1][1][5]]) 
 
 print("Eu "+Words[0]+" de " +Words[1])
-
