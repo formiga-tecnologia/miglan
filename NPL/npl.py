@@ -77,12 +77,12 @@ class npl:
                              Groups[round(a[2])] = [a] 
          return Groups
     
-    def ImportanceKeyForGroup(self,GroupKeys):
+    def ImportanceKeyForGroup(self,GroupKeys,AnalizeType:int=1):
          """
           Generate list with Max and Min width in each group 
         Args:
             GroupKeys (list): Use the list generate for GroupByGroup function 
-
+            AnalizeType (int): Select type of your dispersion Analyze (0:mod, 1:importance, 2:family,3:group)
         Returns:
             list: [(Grpup(round value),Max vector Key, Min Vector Key)]
          """
@@ -94,19 +94,18 @@ class npl:
 
          for i in GroupKeys:
               for a in GroupKeys[i]:
-                    if a[1] > MaxGroup:
+                    if a[AnalizeType] > MaxGroup:
                          VectorMax = a
-                         MaxGroup = a[1]
-                    if a[1] < MinGroup or MinGroup == 0:
+                         MaxGroup = a[AnalizeType]
+                    if a[AnalizeType] < MinGroup or MinGroup == 0:
                          VectorMin = a
-                         MinGroup = a[1]
+                         MinGroup = a[AnalizeType]
               List_Group_important.append((i,VectorMax,VectorMin))
               MaxGroup = 0
               VectorMax = None
               MinGroup = 0
               VectorMin= None
          return List_Group_important
-    
     def ReturnWord(self,Keys):
           List_words = []
           iterator = 0
@@ -119,8 +118,7 @@ class npl:
                      if iterator >i:
                         List_words.append(s)
                         break  
-          return List_words
-                   
+          return List_words           
     def DispersionGroup(self,GroupKeys,AnalizeType:int=1):
              """
             Generate value of Dispersion your GroupKeys.
@@ -149,7 +147,7 @@ Texto_ = "Eu gosto de macarrao com queijo,mas odeio alface"
 #a= n.GroupByGroup(n.SplitWords(Texto_.replace(","," ")," "))
 list_a = n.SplitWords(Texto_,",")
 a= n.GroupByGroup(n.SplitWords(list_a[0]," "))
-ax=n.ImportanceKeyForGroup(a)
+ax=n.ImportanceKeyForGroup(a,1)
 for i in ax:
      print(n.DispersionGroup(i,1))
 Words = n.ReturnWord([ax[0][1][4],ax[1][1][5]]) 
