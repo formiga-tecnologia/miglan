@@ -5,6 +5,11 @@ class npl:
         self.model = Model
 
     def ProcessInput(self,text):
+            """
+             Process the input create default width for the each word.
+            Args:
+            Text (str): the text for analyse 
+            """
             Data = {}
             Text_process = text.split(" ")
             Data["Grammar_key_data"] = self.GrammarProcess()
