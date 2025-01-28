@@ -3,7 +3,6 @@ import json
 class npl:
     def __init__(self,Model:str="npl.json"):
         self.model = Model
-        pass
 
     def ProcessInput(self,text):
             """
@@ -22,6 +21,7 @@ class npl:
             with open(self.model,'w')  as DataFile:
                 json.dump(Data, DataFile, ensure_ascii=False, indent=4, separators=(",", ": "))
 
+
     def TokenModel(self):
           DataModel_ =""
           with open(self.model,'r') as DataModelFile:
@@ -38,6 +38,8 @@ class npl:
     def GrammarProcess(self,GrammarKey="Grammar_key_data",Values=[ 0,1,2,2.1,3]):
           Data = {GrammarKey:Values}
           return Data[GrammarKey]
+    
+
     
     def ProcessKeyWord(self,Text):
         """
@@ -61,6 +63,7 @@ class npl:
                             Key_ = i
         return (KeyWord_value,Key_)
 
+
     def SplitWords(self,Text,Delimiter,List=[]):
          """
          Create one list with words , splits for Delimiters
@@ -77,6 +80,7 @@ class npl:
                  List.append(i)
               return List
          return Text.split(Delimiter)
+    
          
     def GroupByGroup(self,ListWords:list):
          """
@@ -128,6 +132,8 @@ class npl:
               MinGroup = 0
               VectorMin= None
          return List_Group_important
+    
+
     def ReturnWord(self,Keys):
           List_words = []
           iterator = 0
@@ -140,7 +146,9 @@ class npl:
                      if iterator >i:
                         List_words.append(s)
                         break  
-          return List_words           
+          return List_words 
+
+
     def DispersionGroup(self,GroupKeys,AnalizeType:int=1):
              """
             Generate value of Dispersion your GroupKeys.
@@ -160,19 +168,7 @@ class npl:
                          Max_value = i[AnalizeType]
                     if i[AnalizeType] < Min_value:
                          Min_value = i[AnalizeType]
+
              return  Max_value-Min_value/10
 
-n = npl()
 
-Texto_ = "Eu gosto de macarrao com queijo,mas odeio alface"
-#n.ProcessInput("Eu gosto de macarrao com queijo,mas odeio alface")
-#n.TokenModel()
-#a= n.GroupByGroup(n.SplitWords(Texto_.replace(","," ")," "))
-list_a = n.SplitWords(Texto_,",")
-a= n.GroupByGroup(n.SplitWords(list_a[0]," "))
-ax=n.ImportanceKeyForGroup(a,1)
-for i in ax:
-     print(n.DispersionGroup(i,1))
-Words = n.ReturnWord([ax[0][1][4],ax[1][1][5]]) 
-
-print("Eu "+Words[0]+" de " +Words[1])
