@@ -62,6 +62,16 @@ class npl:
         return (KeyWord_value,Key_)
 
     def SplitWords(self,Text,Delimiter,List=[]):
+         """
+         Create one list with words , splits for Delimiters
+         Args:
+             Text (str): Text for split
+             Delimiter (str): what delimiter search and spliter
+             List (list, optional): Add elements to Exist List . Defaults to [].
+
+         Returns:
+             List: ["words"]
+         """
          if List!= []:
               for i in Text.split(Delimiter):
                  List.append(i)
@@ -69,7 +79,14 @@ class npl:
          return Text.split(Delimiter)
          
     def GroupByGroup(self,ListWords:list):
+         """
+          Create and analyze words and group word for group.
+         Args:
+             ListWords (list): List of words process
 
+         Returns:
+             Dicionary: {<group>:<vector words>}
+         """
          Groups = {}
          with open(self.model,"r") as Model:
               JsonModel =json.load(Model)
@@ -146,6 +163,7 @@ class npl:
              return  Max_value-Min_value/10
 
 n = npl()
+
 Texto_ = "Eu gosto de macarrao com queijo,mas odeio alface"
 #n.ProcessInput("Eu gosto de macarrao com queijo,mas odeio alface")
 #n.TokenModel()
