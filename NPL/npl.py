@@ -65,6 +65,16 @@ class npl:
 
 
     def SplitWords(self,Text,Delimiter,List=[]):
+         """
+         Create one list with words , splits for Delimiters
+         Args:
+             Text (str): Text for split
+             Delimiter (str): what delimiter search and spliter
+             List (list, optional): Add elements to Exist List . Defaults to [].
+
+         Returns:
+             List: ["words"]
+         """
          if List!= []:
               for i in Text.split(Delimiter):
                  List.append(i)
@@ -73,7 +83,14 @@ class npl:
     
          
     def GroupByGroup(self,ListWords:list):
+         """
+          Create and analyze words and group word for group.
+         Args:
+             ListWords (list): List of words process
 
+         Returns:
+             Dicionary: {<group>:<vector words>}
+         """
          Groups = {}
          with open(self.model,"r") as Model:
               JsonModel =json.load(Model)
@@ -151,4 +168,7 @@ class npl:
                          Max_value = i[AnalizeType]
                     if i[AnalizeType] < Min_value:
                          Min_value = i[AnalizeType]
+
              return  Max_value-Min_value/10
+
+
