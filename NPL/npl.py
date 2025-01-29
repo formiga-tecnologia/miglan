@@ -148,7 +148,24 @@ class npl:
                         break  
           return List_words 
 
+    def RemoveNoiseWords(self,Text:str):
+         """
+         Removes words that are not registered or irrelevant
+        Args:
+            Text (str): string text
 
+        Returns:
+            New String format with only relevant words.
+         """
+         List_word = Text.split(" ")
+         NewString =""
+         with open(self.model,"r") as Model:
+              JsonModel =json.load(Model)
+              for i in List_word:
+                   if JsonModel.get(i.lower()) and  i.lower() not in JsonModel.get("StopWords_key_data"):
+                        NewString+=" "+i+" "
+                    
+         return NewString 
     def DispersionGroup(self,GroupKeys,AnalizeType:int=1):
              """
             Generate value of Dispersion your GroupKeys.
