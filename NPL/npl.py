@@ -1,8 +1,9 @@
 import os 
 import json
 class npl:
-    def __init__(self,Model:str="npl.json"):
-        self.model = Model
+    def __init__(self,Model:str="npl"):
+        self.model = Model+".json"
+        self.ModelAw = Model+"aw.json"
 
     def ProcessInput(self,text):
             """
@@ -21,7 +22,11 @@ class npl:
             with open(self.model,'w')  as DataFile:
                 json.dump(Data, DataFile, ensure_ascii=False, indent=4, separators=(",", ": "))
 
-
+    def CreateAnswerModel(self):
+         Data = {}
+         with open(self.ModelAw,'w')  as DataFile:
+                json.dump(Data, DataFile, ensure_ascii=False, indent=4, separators=(",", ": "))
+                
     def TokenModel(self):
           DataModel_ =""
           with open(self.model,'r') as DataModelFile:
@@ -36,7 +41,7 @@ class npl:
                     json.dump(DataModel_, DataFile, ensure_ascii=False, indent=4, separators=(",", ": "))
 
     def GrammarProcess(self,GrammarKey="Grammar_key_data",Values=[ 0,1,2,2.1,3]):
-          Data = {GrammarKey:Values}
+          Data = {GrammarKey:Values,"StopWords_key_data":[]}
           return Data[GrammarKey]
     
 
