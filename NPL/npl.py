@@ -44,7 +44,14 @@ class npl:
           Data = {GrammarKey:Values,"StopWords_key_data":[]}
           return Data[GrammarKey]
     
+    def GenerateTokenModelInput(self,Word,TokenList):
+         with open(self.model,'r',encoding="utf-8") as  Model:
+              data = json.load(Model)
+          
+         data[Word] = TokenList
 
+         with open(self.model,'w',encoding="utf-8") as ModelAdd:
+              json.dump(data,ModelAdd,indent=4,ensure_ascii=False)
     
     def ProcessKeyWord(self,Text):
         """
