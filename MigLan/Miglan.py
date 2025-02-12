@@ -2,7 +2,7 @@ import json
 import os
 
 class Miglan:
-    def __init__(self,ModelData="Model",RuleProcess="Rule"):
+    def __init__(self,ModelData="Model",RuleProcess="Rule",BadResponse="I don't know how to answer that"):
         def InjectExtension(Model):
              if not os.path.exists(Model+".json"):
                  with open(Model+".json",'w',encoding="utf-8") as ModelData:
@@ -11,13 +11,14 @@ class Miglan:
         self.Model = InjectExtension(ModelData)
         self.RuleData = InjectExtension(RuleProcess)
         self.Encoding = 'utf-8'
+        self.BadResponse = BadResponse
 
 
-    def GenerateTokenText(self,Text:str):
+    def GenerateTokenText(self,Text:str,Elements:list = [0,None,0] ):
         with open(self.Model,'r',encoding=self.Encoding) as ModelData:
             model_data = json.load(ModelData)
 
-        model_data[Text.lower()] = [0,None,0]
+        model_data[Text.lower()] = Elements
 
         with open(self.Model,'w',encoding=self.Encoding) as ModelData:
             json.dump(model_data,ModelData,indent=2,ensure_ascii=False)
@@ -39,6 +40,8 @@ class Miglan:
             ModData = 1
         else:
             ModData = 0
+        print(ModData)
+        print(ListRule)
         return str(ListRule+str(ModData))
     
     def ResponseData(self,Rule:str):
@@ -47,6 +50,7 @@ class Miglan:
             for i in Data_reader:
                 if Rule == i:
                     return Data_reader[i]
+            return False
     
     def GetClassWord(self,Text:str,type:str):
         DataText = Text.split(" ")
@@ -58,7 +62,9 @@ class Miglan:
                         if type == Data_reader[i][1]:
                             return x
 
-    def ReturnProcessResponse(self,Text:str,ReplaceText:str,ClassWord:str):
+    def ReturnProcessResponse(self,Text:str,ReplaceText:str):
         ReturnData = self.ResponseData(self.ReturnRuleContext(Text))
-        WordData = self.GetClassWord(Text,ClassWord)
+        if ReturnData == False:
+            return self.BadResponse
+        WordData = self.GetClassWord(Text,ReturnData[1])
         return ReturnData[0].replace(ReplaceText,WordData)

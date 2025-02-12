@@ -1,4 +1,6 @@
 {
-    "S_mA1":["Você gosta de {s_m}"],
-    "S_mA0":["Você odeia  {s_m} tanto assim?"]
+    "f.adj.prep.1":["Você gosta de {s_m}","f."],
+    "adj.f.prep.1":["Você gosta de {s_m}","f."],
+    "S_madj.0":["Você odeia  {s_m} tanto assim?"],
+    "m.adv.m.m.prep.1":[" o {s_m} parece interresante","m."]
 }
