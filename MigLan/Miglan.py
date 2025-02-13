@@ -93,15 +93,22 @@ class Miglan:
                         if type == Data_reader[i][1]:
                             return x
                         
-    def GetWordByClass(self,type:str):
+    def GetWordByClass(self,type:str,Felling:int=None):
         with open(self.Model,"r",encoding=self.Encoding) as Respost:
             Data_reader = json.load(Respost)
             for i in Data_reader:
-                    if type == Data_reader[i][1]:
-                        return i
+                    if Felling is  None:
+                        if type == Data_reader[i][1]:
+                            return i
+                    else:
+                        if Felling <= 0:
+                           if type == Data_reader[i][1] and Data_reader[i][0] <= Felling:  
+                                return i
+                        elif type == Data_reader[i][1] and Data_reader[i][0] >= Felling:
+                            return i
             return ""
 
-    def ReturnProcessResponse(self,Text:str,ReplaceText:str,GetClassModel:str=None):
+    def ReturnProcessResponse(self,Text:str,ReplaceText:str,GetClassModel:str=None,ByFelling=False):
         Text = self.RemoveStopWords(Text)
         ReturnData = self.ResponseData(self.ReturnRuleContext(Text))
         if ReturnData == False:
@@ -110,9 +117,12 @@ class Miglan:
             WordData = ""
             List = ReturnData[1].split(" ")
             for i in List:
-                print(i)
-                WordData+= self.GetWordByClass(i)+" "
-                print(WordData)
+                #print(i)
+                if ByFelling == True:
+                    print(self.FeelingProcess(Text))
+                    WordData+= self.GetWordByClass(i,self.FeelingProcess(Text))+" "
+                else:
+                    WordData+= self.GetWordByClass(i)+" "
         else:
             WordData = self.GetClassWord(Text,ReturnData[1])
         return ReturnData[0].replace(ReplaceText,WordData)
