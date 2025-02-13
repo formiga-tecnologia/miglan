@@ -2,7 +2,7 @@ import json
 import os
 
 class Miglan:
-    def __init__(self,ModelData="Model",RuleProcess="Rule",BadResponse="I don't know how to answer that"):
+    def __init__(self,ModelData="Model",RuleProcess="Rule",ModelConfig="config",BadResponse="I don't know how to answer that"):
         def InjectExtension(Model):
              if not os.path.exists(Model+".json"):
                  with open(Model+".json",'w',encoding="utf-8") as ModelData:
@@ -10,6 +10,7 @@ class Miglan:
              return Model+".json"
         self.Model = InjectExtension(ModelData)
         self.RuleData = InjectExtension(RuleProcess)
+        self.config = InjectExtension(ModelConfig)
         self.Encoding = 'utf-8'
         self.BadResponse = BadResponse
 
@@ -25,6 +26,34 @@ class Miglan:
         
         return "OK"
     
+    def StopWords(self,StopWordsList:list):
+        with open(self.config,'r',encoding=self.Encoding) as ModelData:
+            model_data = json.load(ModelData)
+
+        model_data["StopWords_MiglanConfig"] = StopWordsList
+
+        with open(self.config,'w',encoding=self.Encoding) as ModelData:
+            json.dump(model_data,ModelData,indent=2,ensure_ascii=False)
+        
+        return "OK"
+    
+    def RemoveStopWords(self,TextProcess:str):
+        with open(self.config,'r',encoding=self.Encoding) as ModelData:
+            model_data = json.load(ModelData)
+            print(model_data["StopWords_MiglanConfig"])
+        List_avaliable = TextProcess.split(" ")
+        for i in model_data["StopWords_MiglanConfig"]:
+            List_avaliable.remove(i)
+        TextProcess = ""
+        for x in List_avaliable:
+            TextProcess+=x+" "
+        return TextProcess
+
+    def ReturnStopWords(self):
+          with open(self.config,'r',encoding=self.Encoding) as ModelData:
+            model_data = json.load(ModelData)
+          return model_data["StopWords_MiglanConfig"]
+    
     def ReturnRuleContext(self,Text:str):
         TextInput = Text.lower().split(" ")
         ListRule = ""
@@ -38,17 +67,19 @@ class Miglan:
                         ModData+= DataReader[i][0]
         if ModData > 0:
             ModData = 1
+            
         else:
             ModData = 0
         print(ModData)
         print(ListRule)
+
         return str(ListRule+str(ModData))
     
     def ResponseData(self,Rule:str):
         with open(self.RuleData,"r",encoding=self.Encoding) as Respost:
             Data_reader = json.load(Respost)
             for i in Data_reader:
-                if Rule == i:
+                if Rule.split(".") == i.split("."):
                     return Data_reader[i]
             return False
     
