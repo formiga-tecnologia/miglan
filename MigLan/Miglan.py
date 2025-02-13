@@ -107,7 +107,12 @@ class Miglan:
         if ReturnData == False:
             return self.BadResponse
         if not GetClassModel  is None:
-            WordData = self.GetWordByClass(ReturnData[1])
+            WordData = ""
+            List = ReturnData[1].split(" ")
+            for i in List:
+                print(i)
+                WordData+= self.GetWordByClass(i)+" "
+                print(WordData)
         else:
             WordData = self.GetClassWord(Text,ReturnData[1])
         return ReturnData[0].replace(ReplaceText,WordData)

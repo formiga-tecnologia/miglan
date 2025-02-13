@@ -1,6 +1,6 @@
 {
-    "f.adj.prep.1":["Você gosta de {s_m}","f."],
-    "adj.f.prep.1":["Você gosta de {s_m}","f."],
+    "f.adj.prep.1":["Você gosta de {s_m}","adj. f. prep. v. t."],
+    "adj.f.prep.1":["Você gosta de {s_m}","adj. f. prep. v. t."],
     "S_madj.0":["Você odeia  {s_m} tanto assim?"],
     "m.adv.m.m.prep.1":[" o {s_m} parece interresante","m."]
 }
