@@ -70,8 +70,8 @@ class Miglan:
             
         else:
             ModData = 0
-        print(ModData)
-        print(ListRule)
+        # print(ModData)
+        # print(ListRule)
 
         return str(ListRule+str(ModData))
     
