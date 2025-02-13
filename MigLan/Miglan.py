@@ -40,10 +40,10 @@ class Miglan:
     def RemoveStopWords(self,TextProcess:str):
         with open(self.config,'r',encoding=self.Encoding) as ModelData:
             model_data = json.load(ModelData)
-            print(model_data["StopWords_MiglanConfig"])
         List_avaliable = TextProcess.split(" ")
         for i in model_data["StopWords_MiglanConfig"]:
-            List_avaliable.remove(i)
+            if i in List_avaliable:
+                List_avaliable.remove(i)
         TextProcess = ""
         for x in List_avaliable:
             TextProcess+=x+" "
