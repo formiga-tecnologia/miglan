@@ -94,8 +94,19 @@ class Miglan:
                             return x
 
     def ReturnProcessResponse(self,Text:str,ReplaceText:str):
+        Text = self.RemoveStopWords(Text)
         ReturnData = self.ResponseData(self.ReturnRuleContext(Text))
         if ReturnData == False:
             return self.BadResponse
         WordData = self.GetClassWord(Text,ReturnData[1])
         return ReturnData[0].replace(ReplaceText,WordData)
+    
+    def FeelingProcess(self,text):
+         List_text = text.split(" ")
+         Fellings = 0
+         with open(self.Model,"r",encoding=self.Encoding) as Respost:
+            Data_reader = json.load(Respost)
+            for i in Data_reader:
+                if i in List_text:
+                    Fellings+=Data_reader[i][0]
+         return Fellings
