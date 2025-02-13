@@ -92,13 +92,24 @@ class Miglan:
                     if i == x:
                         if type == Data_reader[i][1]:
                             return x
+                        
+    def GetWordByClass(self,type:str):
+        with open(self.Model,"r",encoding=self.Encoding) as Respost:
+            Data_reader = json.load(Respost)
+            for i in Data_reader:
+                    if type == Data_reader[i][1]:
+                        return i
+            return ""
 
-    def ReturnProcessResponse(self,Text:str,ReplaceText:str):
+    def ReturnProcessResponse(self,Text:str,ReplaceText:str,GetClassModel:str=None):
         Text = self.RemoveStopWords(Text)
         ReturnData = self.ResponseData(self.ReturnRuleContext(Text))
         if ReturnData == False:
             return self.BadResponse
-        WordData = self.GetClassWord(Text,ReturnData[1])
+        if not GetClassModel  is None:
+            WordData = self.GetWordByClass(ReturnData[1])
+        else:
+            WordData = self.GetClassWord(Text,ReturnData[1])
         return ReturnData[0].replace(ReplaceText,WordData)
     
     def FeelingProcess(self,text):
