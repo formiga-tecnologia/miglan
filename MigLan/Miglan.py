@@ -36,6 +36,41 @@ class Miglan:
             json.dump(model_data,ModelData,indent=2,ensure_ascii=False)
         
         return "OK"
+
+
+    def GroupWords(self,GroupWord:list):
+        with open(self.config,'r',encoding=self.Encoding) as ModelData:
+            model_data = json.load(ModelData)
+
+        model_data["GroupWords_MiglanConfig"] = GroupWord
+
+        with open(self.config,'w',encoding=self.Encoding) as ModelData:
+            json.dump(model_data,ModelData,indent=2,ensure_ascii=False)
+        
+        return "OK"
+    
+    def ReturnGroupWords(self):
+          with open(self.config,'r',encoding=self.Encoding) as ModelData:
+            model_data = json.load(ModelData)
+          return model_data["GroupWords_MiglanConfig"]
+
+    def GenerateNewMemory(self,MemoryData):
+         with open(self.config,'r',encoding=self.Encoding) as ModelData:
+            model_data = json.load(ModelData)
+
+         model_data["Memory_MiglanConfig"] = MemoryData
+
+         with open(self.config,'w',encoding=self.Encoding) as ModelData:
+            json.dump(model_data,ModelData,indent=2,ensure_ascii=False)
+        
+         return "OK"
+
+    
+    def ReturnMemoryData(self):
+        with open(self.config,'r',encoding=self.Encoding) as ModelData:
+            model_data = json.load(ModelData)
+        return model_data["Memory_MiglanConfig"]
+    
     
     def RemoveStopWords(self,TextProcess:str):
         with open(self.config,'r',encoding=self.Encoding) as ModelData:
@@ -75,9 +110,10 @@ class Miglan:
 
         return str(ListRule+str(ModData))
     
-    def ResponseData(self,Rule:str):
+    def ResponseData(self,Rule:str,Debug=True):
         with open(self.RuleData,"r",encoding=self.Encoding) as Respost:
             Data_reader = json.load(Respost)
+            print(Rule)
             for i in Data_reader:
                 if Rule.split(".") == i.split("."):
                     return Data_reader[i]
@@ -108,7 +144,7 @@ class Miglan:
                             return i
             return ""
 
-    def ReturnProcessResponse(self,Text:str,ReplaceText:str,GetClassModel:str=None,ByFelling=False):
+    def ReturnProcessResponse(self,Text:str,ReplaceText:str,GetClassModel:str=None,ByFelling=False,MemoryUse=False):
         Text = self.RemoveStopWords(Text)
         ReturnData = self.ResponseData(self.ReturnRuleContext(Text))
         if ReturnData == False:
@@ -118,6 +154,7 @@ class Miglan:
             List = ReturnData[1].split(" ")
             for i in List:
                 #print(i)
+                #print(List)
                 if ByFelling == True:
                     print(self.FeelingProcess(Text))
                     WordData+= self.GetWordByClass(i,self.FeelingProcess(Text))+" "
@@ -125,6 +162,10 @@ class Miglan:
                     WordData+= self.GetWordByClass(i)+" "
         else:
             WordData = self.GetClassWord(Text,ReturnData[1])
+        if MemoryUse ==True:
+            a = self.MemoryDataReturn(ReplaceText)[1]
+            if a is not None:
+                return a+" "+ReturnData[0].replace(ReplaceText,WordData)
         return ReturnData[0].replace(ReplaceText,WordData)
     
     def FeelingProcess(self,text):
@@ -136,3 +177,10 @@ class Miglan:
                 if i in List_text:
                     Fellings+=Data_reader[i][0]
          return Fellings
+    
+    def MemoryDataReturn(self,Replace,IndexBase=None):
+        if  IndexBase == None:
+            return (self.FeelingProcess(self.ReturnMemoryData()),self.ReturnProcessResponse(self.ReturnMemoryData(),Replace))
+        else:
+            Data = self.ReturnMemoryData()
+            return (self.FeelingProcess(Data[IndexBase]),self.ReturnProcessResponse(Data[IndexBase],Replace))
