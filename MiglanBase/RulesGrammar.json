@@ -3,5 +3,6 @@
     "adj.f.prep.1":["Você gosta de {s_m} ?","f. adj."],
     "S_madj.0":["Você odeia  {s_m} tanto assim?"],
     "m.adv.m.m.prep.1":[" o {s_m} parece interresante","m."],
-    "st1":["entoa {s_m}","st"]
+    "st.1":["entoa {s_m}","st."],
+    "st.adj.1":["entoa {s_m}","st. f."]
 }
