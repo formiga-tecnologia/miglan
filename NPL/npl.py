@@ -145,6 +145,21 @@ class npl:
               VectorMin= None
          return List_Group_important
     
+    def GetResponseModel(self,InputValue:str):
+         ModelBase = InputValue.replace(" ","").lower()
+         DataReturn = {}
+         Count = 0
+         with open(self.ModelAw,'r') as ModelResponse:
+              Model_data_json  =  json.load(ModelResponse)
+              for i in Model_data_json:
+                   if i in ModelBase:
+                    DataReturn[i] = Model_data_json[i]
+                   Count+=1
+         return DataReturn
+    
+
+    #def 
+    
 
     def ReturnWord(self,Keys):
           List_words = []
