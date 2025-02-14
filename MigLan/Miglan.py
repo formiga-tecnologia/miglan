@@ -129,6 +129,17 @@ class Miglan:
                         if type == Data_reader[i][1]:
                             return x
                         
+    def GetClassToken(self,Text:str):
+        DataText = Text.split(" ")
+        ClassTokens =[]
+        with open(self.Model,"r",encoding=self.Encoding) as Respost:
+            Data_reader = json.load(Respost)
+            for i in Data_reader:
+                for x  in DataText:
+                    if i == x:
+                        ClassTokens.append(Data_reader[i][1])
+        return ClassTokens
+                        
     def GetWordByClass(self,type:str,Felling:int=None):
         with open(self.Model,"r",encoding=self.Encoding) as Respost:
             Data_reader = json.load(Respost)
