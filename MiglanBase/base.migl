@@ -1,6 +1,0 @@
-model:soma
-@soma #0
-@soma #1
-
-model:acumulativo
-@soma #2
