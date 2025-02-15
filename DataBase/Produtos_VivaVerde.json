@@ -1,0 +1,60 @@
+{
+    "produtos": {
+    "chá verde": {"preço": 15.90, "categoria": "bebida", "quantidade_disponível": 50},
+    "óleo de lavanda": {"preço": 29.90, "categoria": "cosmético", "quantidade_disponível": 30},
+    "cosmético natural": {"preço": 49.90, "categoria": "cosmético", "quantidade_disponível": 20},
+    "suplemento vitamínico": {"preço": 89.90, "categoria": "suplemento", "quantidade_disponível":
+    40},
+    "proteína de soja": {"preço": 45.50, "categoria": "suplemento", "quantidade_disponível": 35},
+    "creme de aloe vera": {"preço": 22.00, "categoria": "cosmético", "quantidade_disponível": 25},
+    "chá de camomila": {"preço": 14.00, "categoria": "bebida", "quantidade_disponível": 60},
+    "suplemento de ômega 3": {"preço": 65.00, "categoria": "suplemento",
+    "quantidade_disponível": 50},
+    "óleo de coco": {"preço": 19.90, "categoria": "cosmético", "quantidade_disponível": 45},
+    "chá de hortelã": {"preço": 13.50, "categoria": "bebida", "quantidade_disponível": 55},
+    "gel de vitamina E": {"preço": 24.90, "categoria": "cosmético", "quantidade_disponível": 20},
+    "suplemento de cálcio": {"preço": 39.90, "categoria": "suplemento", "quantidade_disponível":
+    45},
+    "creme de argan": {"preço": 99.00, "categoria": "cosmético", "quantidade_disponível": 15},
+    "chá de hibisco": {"preço": 18.00, "categoria": "bebida", "quantidade_disponível": 40},
+    "suplemento de magnésio": {"preço": 42.50, "categoria": "suplemento",
+    "quantidade_disponível": 50},
+    "máscara de argila": {"preço": 28.00, "categoria": "cosmético", "quantidade_disponível": 30},
+    "suco detox": {"preço": 19.00, "categoria": "bebida", "quantidade_disponível": 50},
+    "óleo essencial de tea tree": {"preço": 34.90, "categoria": "cosmético",
+    "quantidade_disponível": 25},
+    "creme de hidratação intensiva": {"preço": 59.90, "categoria": "cosmético",
+    "quantidade_disponível": 40},
+    "suplemento de vitamina D": {"preço": 58.00, "categoria": "suplemento",
+    "quantidade_disponível": 30},
+    "chá de gengibre": {"preço": 16.00, "categoria": "bebida", "quantidade_disponível": 60}
+    },
+    "entregas": {
+    "SP": {"dias": 5, "quantidade_disponível": 100},
+    "RJ": {"dias": 3, "quantidade_disponível": 120},
+    "MG": {"dias": 7, "quantidade_disponível": 90},
+    "ES": {"dias": 4, "quantidade_disponível": 110},
+    "BA": {"dias": 6, "quantidade_disponível": 80},
+    "PR": {"dias": 8, "quantidade_disponível": 75},
+    "SC": {"dias": 2, "quantidade_disponível": 140},
+    "RS": {"dias": 3, "quantidade_disponível": 130},
+    "DF": {"dias": 5, "quantidade_disponível": 95},
+    "GO": {"dias": 4, "quantidade_disponível": 85},
+    "MT": {"dias": 9, "quantidade_disponível": 70},
+    "MS": {"dias": 10, "quantidade_disponível": 60},
+    "AM": {"dias": 5, "quantidade_disponível": 100},
+    "PI": {"dias": 3, "quantidade_disponível": 125},
+    "SE": {"dias": 6, "quantidade_disponível": 95},
+    "AL": {"dias": 7, "quantidade_disponível": 110},
+    "CE": {"dias": 4, "quantidade_disponível": 105},
+    "PE": {"dias": 5, "quantidade_disponível": 90},
+    "RN": {"dias": 3, "quantidade_disponível": 130},
+    "PB": {"dias": 8, "quantidade_disponível": 85}
+    },
+    "formas_de_pagamento": ["cartão de crédito", "débito", "boleto bancário", "PIX", "transferência bancária", "cartão de débito virtual"],
+    "horarios_de_atendimento": {
+    "segunda_a_sexta": {"inicio": "09:00", "fim": "18:00"},
+    "sabado": {"inicio": "09:00", "fim": "14:00"},
+    "domingo": {"inicio": "fechado", "fim": "fechado"}
+    }
+}

@@ -1,0 +1,11 @@
+{
+  "GroupWords_MiglanConfig": [
+    "prod.",
+    "ac.",
+    "per.",
+    "pd."
+  ],
+  "StopWords_MiglanConfig": [
+    "de"
+  ]
+}
