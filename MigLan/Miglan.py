@@ -209,7 +209,9 @@ class Miglan:
     def SearchByReturnResponseContext(self,WordSearchRule:str,ClassWord:str,Felling=False,Importance=2):
         # Return the wor by importance or felling, and both avaliates
         ...
-
+    def SimilarToken(self,Token:str):
+        # Return the similar tokrn With token pass in method.
+        ...
     def ReturnDataSetence(self,TextInput:str):
         Results = {}
         with open(self.Model,'r',encoding=self.Encoding) as importModel:
