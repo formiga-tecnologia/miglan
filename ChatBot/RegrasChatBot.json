@@ -1,7 +1,20 @@
 {
     "prod.1":["Olá Estamos falando sobre {@}","prod."],
     "prod.0":["Desulpe mas não falamos disso.","prod."],
+    "ac.pd.pd.pd.1":["return_Produto","pd."],
+    "ac.pd.pd.1":["return_Produto","pd."],
+    "ac.pd.1":["return_Produto","pd."],
+    "pd.pd.pd.pd.1":["return_Produto","pd."],
+    "pd.pd.pd.1":["return_Produto","pd."],
+    "pd.pd.pd.pd.fed.0":["Pareque que você não gostou de {@} , o que podemos fazer para melhorar?","pd."],
+    "pd.fed.0":["Pareque que você não gostou de {@} , o que podemos fazer para melhorar?","pd."],
     "pd.pd.1":["return_Produto","pd."],
+    "pd.1":["return_Produto","pd."],
     "ac.prod.1":["As informações sobre {@} são essas... ","prod."],
-    "ac.pd.pd.1":["As informações sobre {@} são essas... ","pd."]
+    
+    "prod.consult.0":["Vendemos {#1} , pelo valor de {#2} e ele é um otimo {#3}","prod."],
+    "consult.0":["Vendemos {#1} , pelo valor de {#2} e ele é um otimo {#3}","consult."],
+
+    "pag.1":["Aceitamos {@} como meio de pagamento.","pag."],
+    "fed.pag.0":["se não gosta de {@} como meio de pagamento, você pode utilizar outro.","pag."]
 }

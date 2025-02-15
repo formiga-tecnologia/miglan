@@ -3,7 +3,7 @@
     2,
     "ac.",
     10
-    ],
+  ],
   "chá": [
     2,
     "pd.",
@@ -298,5 +298,55 @@
     2,
     "pd.",
     6
+  ],
+  "buscarproduto": [
+    0,
+    "prod.",
+    0
+  ],
+  "equivalenteproduto": [
+    0,
+    "consult.",
+    0
+  ],
+  "odeio": [
+    -100,
+    "fed.",
+    8
+  ],
+  "cartão de crédito": [
+    2,
+    "pag.",
+    20
+  ],
+  "débito": [
+    2,
+    "pag.",
+    20
+  ],
+  "boleto bancário": [
+    2,
+    "pag.",
+    20
+  ],
+  "pix": [
+    2,
+    "pag.",
+    20
+  ],
+  "transferência bancária": [
+    2,
+    "pag.",
+    20
+  ],
+  "cartão": [
+    2,
+    "pag.",
+    20
+  ],
+  "cartão de débito virtual": [
+    2,
+    "pag.",
+    20
   ]
 }

@@ -113,7 +113,7 @@ class Miglan:
     def ResponseData(self,Rule:str,Debug=True):
         with open(self.RuleData,"r",encoding=self.Encoding) as Respost:
             Data_reader = json.load(Respost)
-            print(Rule)
+            #print(Rule)
             for i in Data_reader:
                 if Rule.split(".") == i.split("."):
                     return Data_reader[i]
@@ -137,7 +137,7 @@ class Miglan:
             for i in Data_reader:
                 for x  in DataText:
                     if i == x:
-                        ClassTokens.append(Data_reader[i][1])
+                        ClassTokens.append((Data_reader[i][1],i))
         return ClassTokens
                         
     def GetWordByClass(self,type:str,Felling:int=None):
@@ -167,7 +167,7 @@ class Miglan:
                 #print(i)
                 #print(List)
                 if ByFelling == True:
-                    print(self.FeelingProcess(Text))
+                    #print(self.FeelingProcess(Text))
                     WordData+= self.GetWordByClass(i,self.FeelingProcess(Text))+" "
                 else:
                     WordData+= self.GetWordByClass(i)+" "
