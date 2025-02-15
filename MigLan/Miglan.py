@@ -205,3 +205,33 @@ class Miglan:
         else:
             Data = self.ReturnMemoryData()
             return (self.FeelingProcess(Data[IndexBase]),self.ReturnProcessResponse(Data[IndexBase],Replace))
+
+    def SearchByReturnResponseContext(self,WordSearchRule:str,ClassWord:str,Felling=False,Importance=2):
+        # Return the wor by importance or felling, and both avaliates
+        ...
+    def SimilarToken(self,Token:str):
+        # Return the similar tokrn With token pass in method.
+        ...
+    def ReturnDataSetence(self,TextInput:str):
+        Results = {}
+        with open(self.Model,'r',encoding=self.Encoding) as importModel:
+            importModel_dta = json.load(importModel)
+            ListString = TextInput.lower().split(" ")
+            for i in importModel_dta:
+                if  i in ListString:
+                    Results[i] = importModel_dta[i]
+        return Results
+    
+    def ProcessByImportanceWord(self,TextInput:str):
+        Data_analyse = self.ReturnDataSetence(TextInput)
+        MaxValue = 0 
+        Token = ""
+
+        for i in Data_analyse:
+            if Data_analyse[i][2] > MaxValue:
+                Token = i
+                MaxValue = Data_analyse[i][2]
+        
+        return (Token,MaxValue)
+
+                    
