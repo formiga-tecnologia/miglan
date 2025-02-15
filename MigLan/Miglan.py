@@ -172,7 +172,17 @@ class Miglan:
                 else:
                     WordData+= self.GetWordByClass(i)+" "
         else:
-            WordData = self.GetClassWord(Text,ReturnData[1])
+            WordData_0 = ""
+            ListReturn = list(ReturnData[1].split("."))
+            ListReturn.remove('')
+            for i in ListReturn:
+                Test_Word_class =  self.GetClassWord(Text,i+".")
+                if Test_Word_class is not None:
+                    WordData_0 += Test_Word_class+" "
+                else:
+                    ...
+                    #Seach  for the Class in the context
+            WordData = WordData_0
         if MemoryUse ==True:
             a = self.MemoryDataReturn(ReplaceText)[1]
             if a is not None:
