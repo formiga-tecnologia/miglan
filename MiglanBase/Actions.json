@@ -1,4 +1,4 @@
 {
-    "Show":{"Action":"Show","Direction":1,"attach":"None"},
-    "Append":{"Action":"Add","Direction":1,"attach":"None"}
+    "Show":{"Action":"Show","Direction":1,"attach":""},
+    "Append":{"Action":"Add","Direction":1,"attach":""}
 }

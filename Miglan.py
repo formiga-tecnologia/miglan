@@ -35,7 +35,6 @@ class Miglan():
         Terms_of_Search = []
         Value_data = []
         for i in Parans:
-            print(i.get("Action"))
             if i.get("Action") == None:
                 Terms_of_Search.append(list(i.keys())[0])
         with open(self.DataModel, 'r') as file:
@@ -56,6 +55,12 @@ class Miglan():
                 if str(Value[i]) == Obj[0]:
                     self.__Search = Value
             return self.__Search
-
-
+        elif len(Obj) > 1:
+            Obj_compare =""
+            for x  in Obj:
+                Obj_compare+= str(x+" ")
+            for i in Value:
+                if str(Value[i]) in Obj_compare:
+                    self.__Search = Value
+            return self.__Search
   
