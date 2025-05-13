@@ -2,9 +2,17 @@
  xsi:noNamespaceSchemaLocation="Documetation.xsd">
     <Action Name="Show" >
         <Description>Show the current state of the migration</Description>
-        <Command>Show data with exactly correspondence</Command>
+        <Command>Show</Command>
         <Direction>1</Direction>
         <attach></attach>
         <Arguments> Show data name </Arguments>
     </Action>
+
+     <Action Name="append" >
+        <Description>Show the current state of the migration</Description>
+        <Command>Append</Command>
+        <Direction>1</Direction>
+        <attach></attach>
+        <Arguments> Show data name </Arguments>
+     </Action>
 </Actions.MigLan>

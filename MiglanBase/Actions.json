@@ -1,4 +1,12 @@
 {
-    "Show":{"Action":"Show","Direction":1,"attach":""},
-    "Append":{"Action":"Append","Direction":1,"attach":""}
+    "SHOW": {
+        "Action": "SHOW",
+        "Direction": 1,
+        "attach": ""
+    },
+    "APPEND": {
+        "Action": "APPEND",
+        "Direction": 1,
+        "attach": ""
+    }
 }
