@@ -11,7 +11,7 @@
     },
     "WHERE": {
         "Action": "WHERE",
-        "Direction": 1,
+        "Direction": -1,
         "attach": ""
     }
 }

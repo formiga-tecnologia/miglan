@@ -43,7 +43,13 @@ class Miglan():
                     if current_command and current_args:
                         if "Action" in ActionsRead[current_command.upper()]:
                             action_info = ActionsRead
-                            result = self.ActionsMiglan[action_info[current_command.upper()]["Action"].lower()](current_args)
+                            #print(action_info[current_command.upper()]["Direction"])
+                            print(action_info[current_command.upper()]["Direction"])
+                            if action_info[current_command.upper()]["Direction"] < 0:
+                                result = self.ActionsMiglan[action_info[current_command.upper()]["Action"].lower()](current_args,return_data)
+                            else:
+                                print("ta aqui 2?")
+                                result = self.ActionsMiglan[action_info[current_command.upper()]["Action"].lower()](current_args)
                             return_data.append(result)
 
                     return return_data
@@ -57,16 +63,18 @@ class Miglan():
 
         
         
-    def Show(self,Parans:list):
+    def Show(self,Parans:list=None):
         # Adiconar a logica pra tratar e mostras os dados
         Terms_of_Search = []
         Total_values = 0
-        Parans = [item for item in Parans if item not in (None, '')]
+        if  Parans is not None:
+            Parans = [item for item in Parans if item not in (None, '')]
         with open(self.DataModel, 'r') as file:
             self.Data = file.read()
             DataRead = json.loads(self.Data)
             self.__Search = []
-
+            if Parans == None:
+                return  DataRead
             for i in DataRead:
                 if dict(i).get(Parans[0]) != None:
                     self.__Search.append(dict(i).get(Parans[0]))
@@ -103,8 +111,14 @@ class Miglan():
             json.dump(actions, f, indent=4, ensure_ascii=False)
         return actions
 
-    def WhereData():
-        pass
+    def WhereData(self,parans,DataFilter):
+        DataSet = self.Show()
+        ValueKey = ''
+        for i in range(1,len(parans)):
+            ValueKey+=parans[i]+" "
+        for i in DataSet:
+            if str(i.get(parans[0])).replace(" ","") == ValueKey.replace(" ",""):
+                return i
 
         
   
