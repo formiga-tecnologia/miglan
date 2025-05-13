@@ -7,44 +7,83 @@ class Miglan():
     def __init__(self, Columns=None, Model=None,DataModel=None) -> None:
         self.Columns = Columns
         self.Model = Model if Model is not None else "./MiglanBase/Actions.json"
-        self.ActionsMiglan = {"Show":self.Show}
+        self.ActionsMiglan = {"Show":self.Show,"Append":self.Add}
         self.DataModel = DataModel if DataModel is not None else "./MiglanBase/Data.json"
         self.__Search =None
         
-    def ReadActions(self,Actions=None):
+    def ReadActions(self, Actions=None):
         if Actions is not None:
-            String_actions = Actions.split(" ")
-            String_Response  = []
+            tokens = Actions.split(" ")
+            return_data = []
+            current_command = None
+            current_args = []
+
         if os.path.exists(self.Model):
             with open(self.Model, 'r') as file:
                 self.Actions = file.read()
                 ActionsRead = json.loads(self.Actions)
+
                 if Actions is not None:
-                    for i in String_actions:
-                        String_Response.append(ActionsRead.get(i,{i:i}))
-                    return self.ActionsMiglan[String_Response[0]["Action"]](String_Response)   
+                    for token in tokens:
+                        if token in ActionsRead:
+                            # Se já havia um comando anterior, executa ele com os args acumulados
+                            if current_command:
+                                action_info = ActionsRead[current_command]
+                                if "Action" in action_info:
+                                    result = self.ActionsMiglan[action_info["Action"]](current_args)
+                                    return_data.append(result)
+                                current_args = []  # Limpa os argumentos
+                            current_command = token  # Novo comando identificado
+                        else:
+                            current_args.append(token)
+
+                    # Executa o último comando após o loop
+                    if current_command and current_args:
+                        action_info = ActionsRead[current_command]
+                        if "Action" in action_info:
+                            result = self.ActionsMiglan[action_info["Action"]](current_args)
+                            return_data.append(result)
+
+                    return return_data
+
                 else:
                     self.Actions = ActionsRead
-                return self.Actions
+                    return self.Actions
+
         else:
             raise FileNotFoundError(f"File {self.Model} not found.")
+
         
         
-    def Show(self,Parans):
+    def Show(self,Parans:list):
         # Adiconar a logica pra tratar e mostras os dados
         Terms_of_Search = []
         Value_data = []
-        for i in Parans:
-            if i.get("Action") == None:
-                Terms_of_Search.append(list(i.keys())[0])
+        Total_values = 0
+        Parans = [item for item in Parans if item not in (None, '')]
         with open(self.DataModel, 'r') as file:
             self.Data = file.read()
             DataRead = json.loads(self.Data)
             for i in DataRead:
-                  Value_data =  self.__auxRead__(Terms_of_Search,i)
-                  if Value_data != None:
-                      break
-        return Value_data
+                if Total_values == len(Parans):
+                    self.__Search = i
+                    break
+                for y in i:
+                    for x in Parans:
+                        if x in str(i[y]):
+                            Terms_of_Search.append(x)
+                            Total_values += 1
+                if Total_values == len(Parans):
+                    self.__Search = i
+                    break
+                #   Value_data =  self.__auxRead__(Terms_of_Search,i)
+                #   if Value_data != None:
+                #       break
+        return self.__Search
+    
+    def Add(self,Parans):
+        Parans = [item for item in Parans if item not in (None, '')]
+        return Parans
 
 
     def __auxRead__(self,Obj:list,Value):
@@ -63,4 +102,5 @@ class Miglan():
                 if str(Value[i]) in Obj_compare:
                     self.__Search = Value
             return self.__Search
+        
   
