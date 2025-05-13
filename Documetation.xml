@@ -23,4 +23,13 @@
         <attach></attach>
         <Arguments> Show data name </Arguments>
      </Action>
+
+     <Action Name="More">
+        <Description> Descovery More Than Values </Description>
+        <Command></Command>
+        <Direction>1</Direction>
+        <attach>*moreThan</attach>
+        <Arguments>Compare Data Set</Arguments>
+     </Action>
+
 </Actions.MigLan>

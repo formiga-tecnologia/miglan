@@ -13,5 +13,10 @@
         "Action": "WHERE",
         "Direction": -1,
         "attach": ""
+    },
+    "MORE": {
+        "Action": "",
+        "Direction": 1,
+        "attach": "*moreThan"
     }
 }

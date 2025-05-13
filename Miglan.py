@@ -32,6 +32,7 @@ class Miglan():
                             if current_command:
                                 action_info = ActionsRead
                                 if "Action" in action_info[current_command.upper()]:
+                                    print(action_info[current_command.upper()])
                                     result = self.ActionsMiglan[action_info[current_command.upper()]["Action"].lower()](current_args)
                                     return_data.append(result)
                                 current_args = [] 
@@ -48,7 +49,6 @@ class Miglan():
                             if action_info[current_command.upper()]["Direction"] < 0:
                                 result = self.ActionsMiglan[action_info[current_command.upper()]["Action"].lower()](current_args,return_data)
                             else:
-                                print("ta aqui 2?")
                                 result = self.ActionsMiglan[action_info[current_command.upper()]["Action"].lower()](current_args)
                             return_data.append(result)
 
