@@ -8,5 +8,10 @@
         "Action": "APPEND",
         "Direction": 1,
         "attach": ""
+    },
+    "WHERE": {
+        "Action": "WHERE",
+        "Direction": 1,
+        "attach": ""
     }
 }

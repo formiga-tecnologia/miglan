@@ -15,4 +15,12 @@
         <attach></attach>
         <Arguments> Show data name </Arguments>
      </Action>
+
+     <Action Name="where">
+        <Description>Show the current state of the migration</Description>
+        <Command>where</Command>
+        <Direction>1</Direction>
+        <attach></attach>
+        <Arguments> Show data name </Arguments>
+     </Action>
 </Actions.MigLan>

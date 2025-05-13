@@ -8,7 +8,7 @@ class Miglan():
     def __init__(self, Columns=None, Model=None,DataModel=None) -> None:
         self.Columns = Columns
         self.Model = Model if Model is not None else "./MiglanBase/Actions.json"
-        self.ActionsMiglan = {"show":self.Show,"append":self.Add}
+        self.ActionsMiglan = {"show":self.Show,"append":self.Add,"where":self.WhereData}
         self.DataModel = DataModel if DataModel is not None else "./MiglanBase/Data.json"
         self.__Search =None
         
@@ -28,20 +28,21 @@ class Miglan():
                 if Actions is not None:
                     for token in tokens:
                         if token.upper() in ActionsRead:
-                            # Se já havia um comando anterior, executa ele com os args acumulados
+                            
                             if current_command:
                                 action_info = ActionsRead
                                 if "Action" in action_info[current_command.upper()]:
                                     result = self.ActionsMiglan[action_info[current_command.upper()]["Action"].lower()](current_args)
                                     return_data.append(result)
-                                current_args = []  # Limpa os argumentos
-                            current_command = token  # Novo comando identificado
+                                current_args = [] 
+                            current_command = token  
                         else:
                             current_args.append(token)
 
-                    # Executa o último comando após o loop
+                   
                     if current_command and current_args:
                         if "Action" in ActionsRead[current_command.upper()]:
+                            action_info = ActionsRead
                             result = self.ActionsMiglan[action_info[current_command.upper()]["Action"].lower()](current_args)
                             return_data.append(result)
 
@@ -59,13 +60,16 @@ class Miglan():
     def Show(self,Parans:list):
         # Adiconar a logica pra tratar e mostras os dados
         Terms_of_Search = []
-        Value_data = []
         Total_values = 0
         Parans = [item for item in Parans if item not in (None, '')]
         with open(self.DataModel, 'r') as file:
             self.Data = file.read()
             DataRead = json.loads(self.Data)
+            self.__Search = []
+
             for i in DataRead:
+                if dict(i).get(Parans[0]) != None:
+                    self.__Search.append(dict(i).get(Parans[0]))
                 if Total_values == len(Parans):
                     self.__Search = i
                     break
@@ -77,9 +81,6 @@ class Miglan():
                 if Total_values == len(Parans):
                     self.__Search = i
                     break
-                #   Value_data =  self.__auxRead__(Terms_of_Search,i)
-                #   if Value_data != None:
-                #       break
         return self.__Search
     
     def Add(self,Parans):
@@ -102,21 +103,8 @@ class Miglan():
             json.dump(actions, f, indent=4, ensure_ascii=False)
         return actions
 
-    def __auxRead__(self,Obj:list,Value):
-        Obj = [item for item in Obj if item not in (None, '')]
-        self.__Search = None
-        if len(Obj) == 1:
-            for i in Value:
-                if str(Value[i]) == Obj[0]:
-                    self.__Search = Value
-            return self.__Search
-        elif len(Obj) > 1:
-            Obj_compare =""
-            for x  in Obj:
-                Obj_compare+= str(x+" ")
-            for i in Value:
-                if str(Value[i]) in Obj_compare:
-                    self.__Search = Value
-            return self.__Search
+    def WhereData():
+        pass
+
         
   
