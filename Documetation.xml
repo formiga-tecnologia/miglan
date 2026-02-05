@@ -1,6 +1,7 @@
 <Actions.MigLan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:noNamespaceSchemaLocation="Documetation.xsd">
     <Action Name="Show" >
+  
         <Description>Show the current state of the migration</Description>
         <Command>Show</Command>
         <Direction>1</Direction>
